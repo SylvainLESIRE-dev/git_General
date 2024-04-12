@@ -1,4 +1,4 @@
-﻿#VERSION 1.0
+﻿#VERSION 1.2
 # Created by Sylvain LESIRE
 
 $HTMLdoc = $null
