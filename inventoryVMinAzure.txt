@@ -1,0 +1,15 @@
+ Resources
+| where type =~ 'microsoft.compute/virtualmachines' and name contains "OPU"
+| extend nics=array_length(properties.networkProfile.networkInterfaces)
+| mv-expand nic=properties.networkProfile.networkInterfaces
+| where nics == 1 or nic.properties.primary =~ 'true' or isempty(nic)
+| project vmName = name, vmId = id, location, AZ = zones , VMressourceGroup = resourceGroup ,   vmSize=tostring(properties.hardwareProfile.vmSize), nicId = tostring(nic.id)
+| join kind=leftouter (
+      Resources
+            | where type =~ 'microsoft.network/networkinterfaces' 
+            | mv-expand ipconfig=properties.ipConfigurations
+            | mv-expand ASGinfo = properties.applicationSecurityGroups
+            | project  nicId = id , name, resourceGroup, privateIp = tostring(ipconfig.properties.privateIPAddress), ASGids = ipconfig.properties.applicationSecurityGroups
+   )
+on nicId
+| project-away nicId1

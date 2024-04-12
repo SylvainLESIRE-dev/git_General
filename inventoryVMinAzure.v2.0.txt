@@ -1,0 +1,24 @@
+ Resources
+| where type =~ 'microsoft.compute/virtualmachines' and tags.atemi=="4478"
+| extend nics=array_length(properties.networkProfile.networkInterfaces)
+| mv-expand nic=properties.networkProfile.networkInterfaces
+| where nics == 1 or nic.properties.primary =~ 'true' or isempty(nic)
+| project atemiCode = ['tags'].atemi,  vmName = name, vmId = id, location, AZ = zones , VMressourceGroup = resourceGroup ,   vmSize=tostring(properties.hardwareProfile.vmSize), nicId = tostring(nic.id)
+| join kind=leftouter (
+      Resources
+            | where type =~ 'microsoft.network/networkinterfaces' 
+            | mv-expand ipconfig=properties.ipConfigurations
+            | project  nicId = id , nicName = name, NicresourceGroup = resourceGroup, privateIp = tostring(ipconfig.properties.privateIPAddress)
+   )
+on nicId
+| join kind = leftouter (
+resources
+| where type == "microsoft.network/networkinterfaces"
+| mv-expand properties.ipConfigurations
+| mv-expand asgID=properties_ipConfigurations.properties.applicationSecurityGroups
+| parse asgID with * "/applicationSecurityGroups/" asg '"' *
+| parse properties.virtualMachine.id with * "/virtualMachines/" vmName
+| summarize ASGId = make_list(asg) by vmName
+)on vmName
+| project-away nicId1, vmName1
+| order by ['VMressourceGroup'] desc

@@ -1,0 +1,5 @@
+Resources |
+where type =~ "microsoft.network/virtualnetworks" |
+extend subnet = properties.subnets |
+mv-expand subnet |
+project subnetName=subnet.name, subnetCIDR=subnet.properties.addressPrefix, VNetName=name, VNetCIDR=properties.addressSpace.addressPrefixes[0], location
