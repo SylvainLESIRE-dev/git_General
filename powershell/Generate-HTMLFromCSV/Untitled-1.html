@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<!--Page réalisée par Sylvain LESIRE -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Sylvain LESIRE">
+    <style>
+        h1 {
+            background-color:#00008C;
+            color: white;
+            font-family: "Verdana", monospace;
+        }
+        h2 {
+            background-color: gray;
+            color: white;
+            font-family: "Verdana", monospace;
+        }
+        h3{
+            font-family: "Verdana", monospace;
+            color:grey;
+            font-family: "Verdana", monospace;    
+        }
+        p, a{
+            /*  border-bottom: 1px solid #ddd;    */
+            font-family: "Verdana", monospace;
+            text-align: left;
+        }
+        
+        th, td {
+            /*  border-bottom: 1px solid #ddd;    */
+            font-family: "Verdana", monospace;
+            text-align: left;
+            width: 25%;
+        }
+        table {
+          width: 100%;
+          border-bottom: 1px solid #ddd;
+          border-collapse: collapse;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        img {
+             width: 20px;
+            height: auto;
+        }
+        img.logo {
+            width: 200px ;
+            height: auto;
+        }
+        img.wbs {
+            width: 90% ;
+            height: auto;
+            align-items: center;
+        }
+    </style>    
+</head>
+<title>#CLIENT# - Work Breakdown Structure - #PROJET# </title>
+<body>
+    <table bgcolor="#ffffff">
+        <tr>
+            <td><img class="logo" src="https://open.wd3.myworkdayjobs.com/OPEN/assets/logo" align="right"></td>
+        </tr>
+        <tr><td bgcolor="#00008C"><h1>#CLIENT# - Work Breakdown Structure - #PROJET# </h1></td></tr>
+        <tr><td bgcolor="#00008C"><font size="2" color="gray">Rédacteur : Sylvain LESIRE <br> Réalisation : #DATE#</font></td></tr>
+    </table>
+
+    <h2>Organigramme des tâches</h2>
+    <p>Organigramme réalisé avec Microsoft Excel. <i>(cliquer sur l'image pour zoomer)</i></p>
+    <img src="img/wbs.png" onclick="window.open(this.src)" class="wbs" width="100%">
+    
+    <h2>Listes des taches</h2>
+    <p>Listes des taches exportées depuis fichier Excel.</p>
+    <i><font color="red">Faire un tableau à partir d'un CSV. </font></i>
+    
+    <h2>Planning Gantt</h2>
+    <p>Planning réalisé sur <a href="https://www.ganttproject.biz/" target="_blank">GanttProject.</a></p>
+    <i><font color="red">Faire un export format PNG. </font></i>
+        
+    <h2>Description des tâches</h2>
+
+
+
+    ##ADDTASKS##
+   
+
+</body>
+
+</html>
